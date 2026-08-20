@@ -1,0 +1,38 @@
+/* Fuerza a que #primary (video) y #secondary (comentarios) se alineen
+   arriba en vez de estirarse a la misma altura. */
+#columns.ytd-watch-flexy {
+  align-items: flex-start !important;
+}
+
+/* El video queda "pegado" en la parte superior mientras el usuario
+   hace scroll por los comentarios en la columna derecha. */
+#primary.ytd-watch-flexy {
+  position: sticky !important;
+  top: 56px !important; /* alto del header de YouTube */
+  z-index: 0;
+}
+
+/* Asegura que la columna de comentarios tenga suficiente alto como
+   para que el scroll de la página siga funcionando de forma natural.
+   z-index por encima de #primary para que el glow/fondo del
+   reproductor no oscurezca los comentarios. */
+#secondary.ytd-watch-flexy {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+/* Los comentarios quedan en una caja con scroll propio y altura fija,
+   así los videos relacionados aparecen justo debajo sin tener que
+   hacer scroll por todos los comentarios. */
+#comments {
+  display: block !important;
+  max-height: calc(100vh - 72px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  margin-bottom: 16px;
+  border: 1px solid var(--yt-spec-10-percent-layer, rgba(128, 128, 128, 0.2));
+  border-radius: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+}
